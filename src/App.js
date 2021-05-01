@@ -14,19 +14,16 @@ const useStyles = makeStyles({
     display: "grid",
     gridTemplateColumns: "30% 70%",
   },
-  inside_container: {},
 });
 
 function App() {
   const classes = useStyles();
   return (
-    <div className={classes.app} >
-      <div className={classes.main_container}>
-        <section>hj</section>
-        <section>
-          <InitialDisplayBox />
-        </section>
-      </div>
+    <div className={classes.main_container}>
+      <section>hj</section>
+      <section>
+        <InitialDisplayBox />
+      </section>
     </div>
   );
 }

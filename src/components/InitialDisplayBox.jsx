@@ -1,9 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
-import InitialImg from "../images/initial.png";
+import InitialImg from "../images/intro-connection-light.jpg";
 import LaptopMacIcon from "@material-ui/icons/LaptopMac";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   container: {
     width: "100%",
     height: "100%",
@@ -30,7 +30,7 @@ const useStyles = makeStyles({
     borderBottom: "1.6px solid rgba(0,0,0,0.08)",
   },
   image: {
-    width: "300px",
+    width: "250px",
   },
   afterline: {
     display: "grid",
@@ -43,12 +43,12 @@ const useStyles = makeStyles({
     fontWeight: 400,
     gridGap: 8,
     "& a": {
-        color: "#07bc4c",
+        color: theme.palette.primary.main,
         cursor: "pointer",
         textDecoration: "none"
     }
   },
-});
+}));
 
 function InitialDisplayBox() {
   const classes = useStyles();
