@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box !important;
 }
 
 *:active {
@@ -13,7 +14,10 @@ button {
 
 body {
   margin: 0;
+  height: 100vh;
+  overflow: hidden;
   font-family: "Source Sans Pro", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(180deg, #009688 17%, #d6dbd8 17%);
 }
