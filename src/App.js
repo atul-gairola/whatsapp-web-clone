@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core";
 
 import InitialDisplayBox from "./components/InitialDisplayBox";
+import Sidebar from "./components/Sidebar/Sidebar";
 
 const useStyles = makeStyles({
   main_container: {
@@ -20,7 +21,9 @@ function App() {
   const classes = useStyles();
   return (
     <div className={classes.main_container}>
-      <section>hj</section>
+      <section>
+        <Sidebar />
+      </section>
       <section>
         <InitialDisplayBox />
       </section>
