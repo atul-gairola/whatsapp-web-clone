@@ -2,9 +2,15 @@ import React from "react";
 import { makeStyles } from "@material-ui/core";
 
 import ChatboxHeader from "./ChatboxHeader";
+import ChatboxBody from "./ChatBoxBody";
 
 const useStyles = makeStyles({
-  container: {},
+  container: {
+      display: "grid",
+      height: "100%",
+      gridTemplateColumns: "1fr",
+      gridTemplateRows: "auto 1fr auto",
+  },
 });
 
 function Chatbox() {
@@ -13,6 +19,7 @@ function Chatbox() {
   return (
     <div className={classes.container}>
       <ChatboxHeader />
+      <ChatboxBody />
     </div>
   );
 }
