@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core";
 
 import InitialDisplayBox from "./components/InitialDisplayBox";
 import Sidebar from "./components/Sidebar/Sidebar";
+import Chatbox from "./components/Chatbox/Chatbox";
 
 const useStyles = makeStyles({
   main_container: {
@@ -25,7 +26,8 @@ function App() {
         <Sidebar />
       </section>
       <section>
-        <InitialDisplayBox />
+        {/* <InitialDisplayBox /> */}
+        <Chatbox />
       </section>
     </div>
   );
