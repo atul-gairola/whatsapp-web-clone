@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles, IconButton } from "@material-ui/core";
 
 import AttachFileIcon from "@material-ui/icons/AttachFile";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
+import MicIcon from "@material-ui/icons/Mic";
+import SendIcon from "@material-ui/icons/Send";
+
+import TextInput from "./TextInput";
 
 const useStyles = makeStyles({
   footer: {
@@ -32,9 +36,36 @@ const useStyles = makeStyles({
       },
     },
   },
+  messageInputContainer: {
+    marginRight: "20px",
+    flexGrow: 1,
+  },
+  lastButtonContainer: {
+    display: "flex",
+    flex: "none",
+    marginRight: 10,
+    minHeight: 52,
+    "& .MuiIconButton-root": {
+      padding: "5px",
+      marginLeft: "5px",
+      "&:hover": {
+        backgroundColor: "transparent",
+      },
+    },
+  },
 });
 
 function ChatboxFooter() {
+  const [isInputInFocus, setIsInputInFocus] = useState(true);
+
+  const handleOnFocus = () => {
+    setIsInputInFocus(true);
+  };
+
+  const handleOnBlur = () => {
+    setIsInputInFocus(false);
+  };
+
   const classes = useStyles();
 
   return (
@@ -54,8 +85,21 @@ function ChatboxFooter() {
             />
           </IconButton>
         </div>
-        <div className={classes.messageInputContainer}></div>
-        <div className={classes.lastButtonContainer}></div>
+        <div className={classes.messageInputContainer}>
+          <TextInput
+            handleOnBlur={handleOnBlur}
+            handleOnFocus={handleOnFocus}
+          />
+        </div>
+        <div className={classes.lastButtonContainer}>
+          <IconButton>
+            {isInputInFocus ? (
+              <SendIcon style={{ fontSize: 24, color: "#919191" }} />
+            ) : (
+              <MicIcon style={{ fontSize: 24, color: "#919191" }} />
+            )}
+          </IconButton>
+        </div>
       </div>
     </footer>
   );
