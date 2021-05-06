@@ -63,7 +63,7 @@ function SidebarSearch() {
           )} */}
         </button>
         <input
-          autoComplete={false}
+          autoComplete={"false"}
           onClick={() => setAnimate(!animate)}
           name="search"
           placeholder="Search people or groups"
