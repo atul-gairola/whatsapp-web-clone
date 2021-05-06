@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core";
 import InitialImg from "../images/intro-connection-light.jpg";
 import LaptopMacIcon from "@material-ui/icons/LaptopMac";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     width: "100%",
     height: "100%",
@@ -43,10 +43,10 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 400,
     gridGap: 8,
     "& a": {
-        color: theme.palette.primary.main,
-        cursor: "pointer",
-        textDecoration: "none"
-    }
+      color: theme.palette.primary.main,
+      cursor: "pointer",
+      textDecoration: "none",
+    },
   },
 }));
 
@@ -64,7 +64,8 @@ function InitialDisplayBox() {
         <div className={classes.afterline}>
           <LaptopMacIcon style={{ marginTop: "3px" }} fontSize="small" />
           <p>
-            Original WhatsApp for Windows. <a href="#" >Get it here.</a>{" "}
+            Original WhatsApp for Windows.{" "}
+            <a href="https://www.whatsapp.com/download">Get it here.</a>{" "}
           </p>
         </div>
       </div>

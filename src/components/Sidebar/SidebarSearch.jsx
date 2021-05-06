@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { makeStyles, Grow } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import { AnimatePresence, motion } from "framer-motion";
+// import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+// import { AnimatePresence, motion } from "framer-motion";
 
 const useStyles = makeStyles({
   searchContainer: {
@@ -49,7 +49,7 @@ function SidebarSearch() {
     <div className={classes.searchContainer}>
       <div className={classes.wrapper}>
         <button className={classes.searchButton}>
-            <SearchIcon style={{ fontSize: 20, color: "#919191" }} />
+          <SearchIcon style={{ fontSize: 20, color: "#919191" }} />
 
           {/* {!animate && (
             <motion.div initial={{ opacity: 0 }} animate={{opacity: 1}} exit={{ opacity: 0 }}>
