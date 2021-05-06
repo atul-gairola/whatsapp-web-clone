@@ -1,7 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
 
-import { useChatboxContext } from "../../contexts/ChatboxContext";
 
 import ChatTab from "./ChatTab";
 

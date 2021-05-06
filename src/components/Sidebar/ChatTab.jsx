@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { makeStyles, Avatar } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
+import { useChatboxContext } from "../../contexts/ChatboxContext";
+
 const useStyles = makeStyles((theme) => ({
   container: {
     padding: "0 15px",
@@ -78,9 +80,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ChatTab({ img, name, messageInfo, time, read, unseen_num }) {
+function ChatTab({ img, name, messageInfo, time, chatId, read, unseen_num }) {
   const classes = useStyles();
   const [hover, setHover] = useState(false);
+  const { updateChatbox } = useChatboxContext();
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    updateChatbox({
+      img,
+      name,
+      chatId,
+    });
+  };
 
   const unreadStyle = {
     color: "#000",
@@ -93,6 +105,7 @@ function ChatTab({ img, name, messageInfo, time, read, unseen_num }) {
 
   return (
     <div
+      onClick={handleClick}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       className={classes.container}
