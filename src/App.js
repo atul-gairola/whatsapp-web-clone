@@ -5,6 +5,7 @@ import InitialDisplayBox from "./components/InitialDisplayBox";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Chatbox from "./components/Chatbox/Chatbox";
 
+import { useChatboxContext } from "./contexts/ChatboxContext";
 
 const useStyles = makeStyles({
   main_container: {
@@ -25,6 +26,9 @@ const useStyles = makeStyles({
 
 function App() {
   const classes = useStyles();
+  const { currentChatbox } = useChatboxContext();
+
+  console.log(currentChatbox);
 
   return (
     <div className={classes.main_container}>
@@ -32,8 +36,15 @@ function App() {
         <Sidebar />
       </section>
       <section>
-        {/* <InitialDisplayBox /> */}
-        <Chatbox />
+        {currentChatbox ? (
+          <Chatbox
+            name={currentChatbox.name}
+            img={currentChatbox.img}
+            chatboxId={currentChatbox.chatboxId}
+          />
+        ) : (
+          <InitialDisplayBox />
+        )}
       </section>
     </div>
   );

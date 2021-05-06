@@ -14,14 +14,14 @@ const useStyles = makeStyles({
   },
 });
 
-function Chatbox() {
+function Chatbox({ name, img, chatboxId }) {
   const classes = useStyles();
 
   return (
     <div className={classes.container}>
-      <ChatboxHeader />
-      <ChatboxBody />
-      <ChatboxFooter />
+      <ChatboxHeader name={name} img={img} chatboxId={chatboxId} />
+      <ChatboxBody chatboxId={chatboxId} />
+      <ChatboxFooter chatboxId={chatboxId} />
     </div>
   );
 }

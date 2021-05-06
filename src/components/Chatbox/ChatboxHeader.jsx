@@ -44,7 +44,7 @@ const useStyles = makeStyles({
   },
 });
 
-function ChatboxHeader({ name, info, img, isGroup }) {
+function ChatboxHeader({ name, info, img, isGroup, chatboxId }) {
   const classes = useStyles();
   return (
     <div className={classes.headerContainer}>
@@ -52,11 +52,11 @@ function ChatboxHeader({ name, info, img, isGroup }) {
         <Avatar
           style={{ cursor: "pointer", marginRight: 15 }}
           alt="Remy Sharp"
-          src="http://placeimg.com/640/480/abstract"
+          src={img}
         />
         <div className={classes.infoContainer}>
           <div>
-            <span>Person Name</span>
+            <span>{name}</span>
           </div>
           <div style={{ textOverflow: "ellipsis" }}>
             click here for contact info
