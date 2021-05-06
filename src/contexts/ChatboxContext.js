@@ -7,14 +7,18 @@ export function useChatboxContext() {
 }
 
 export function ChatboxContextProvider({ children }) {
-  const [chatboxId, setChatBoxId] = useState();
+  const [currentChatbox, setCurrentChatbox] = useState();
 
-  const updateChatbox = (id) => {
-    setChatBoxId(id);
+  const updateChatbox = ({ id, name, img }) => {
+    setCurrentChatbox({
+      id,
+      name,
+      img,
+    });
   };
 
   return (
-    <ChatboxContext.Provider value={{ chatboxId, updateChatbox }}>
+    <ChatboxContext.Provider value={{ currentChatbox, updateChatbox }}>
       {children}
     </ChatboxContext.Provider>
   );

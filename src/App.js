@@ -5,7 +5,6 @@ import InitialDisplayBox from "./components/InitialDisplayBox";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Chatbox from "./components/Chatbox/Chatbox";
 
-import { useChatboxContext } from "./contexts/ChatboxContext";
 
 const useStyles = makeStyles({
   main_container: {
@@ -26,9 +25,6 @@ const useStyles = makeStyles({
 
 function App() {
   const classes = useStyles();
-  const { chatboxId } = useChatboxContext();
-
-  console.log(chatboxId);
 
   return (
     <div className={classes.main_container}>
