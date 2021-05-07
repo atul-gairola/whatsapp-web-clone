@@ -4,8 +4,10 @@ import { makeStyles } from "@material-ui/core";
 import InitialDisplayBox from "./components/InitialDisplayBox";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Chatbox from "./components/Chatbox/Chatbox";
+import Login from "./components/Login";
 
 import { useChatboxContext } from "./contexts/ChatboxContext";
+import { useAuth } from "./contexts/AuthContext";
 
 const useStyles = makeStyles({
   main_container: {
@@ -27,11 +29,16 @@ const useStyles = makeStyles({
 function App() {
   const classes = useStyles();
   const { currentChatbox } = useChatboxContext();
+  const { currentUser, signout } = useAuth();
 
   console.log(currentChatbox);
+  console.log(currentUser);
 
-  return (
+  return !currentUser ? (
+    <Login />
+  ) : (
     <div className={classes.main_container}>
+      {/* <button onClick={signout}>Signout</button> */}
       <section>
         <Sidebar />
       </section>
