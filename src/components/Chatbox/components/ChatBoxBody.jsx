@@ -14,9 +14,12 @@ const useStyles = makeStyles({
     width: "100%",
     overflowX: "hidden",
     overflowY: "scroll",
-    maxHeight: "calc(100vh - 62px - 59px)",
+    maxHeight: "calc(100vh - 62px - 59px - 40px)",
     display: "flex",
     flexDirection: "column",
+    "@media(max-width:1396px)": {
+      maxHeight: "calc(100vh - 62px - 59px)",  
+    }
   },
   spaceDiv: {
     flex: "1 1 auto",
