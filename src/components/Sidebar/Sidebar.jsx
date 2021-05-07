@@ -1,8 +1,8 @@
 import React from "react";
 
-import SidebarHeader from "./SidebarHeader";
-import SidebarSearch from "./SidebarSearch";
-import ChatsWrapper from "./ChatsWrapper";
+import SidebarHeader from "./components/SidebarHeader";
+import SidebarSearch from "./components/SidebarSearch";
+import ChatsWrapper from "./components/ChatsWrapper";
 
 function Sidebar() {
   return (

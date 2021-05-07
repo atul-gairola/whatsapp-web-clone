@@ -1,9 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
 
-import ChatboxHeader from "./ChatboxHeader";
-import ChatboxBody from "./ChatBoxBody";
-import ChatboxFooter from "./ChatboxFooter";
+import ChatboxHeader from "./components/ChatboxHeader";
+import ChatboxBody from "./components/ChatBoxBody";
+import ChatboxFooter from "./components/ChatboxFooter";
 
 const useStyles = makeStyles({
   container: {

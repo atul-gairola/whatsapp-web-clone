@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { makeStyles, Avatar } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import { useChatboxContext } from "../../contexts/ChatboxContext";
+import { useChatboxContext } from "../../../contexts/ChatboxContext";
 
 const useStyles = makeStyles((theme) => ({
   container: {

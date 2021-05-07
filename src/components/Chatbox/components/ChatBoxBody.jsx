@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { makeStyles } from "@material-ui/core";
-import Background from "../../images/bckg.png";
+import Background from "../../../images/bckg.png";
 
 import Chat from "./Chat";
 
