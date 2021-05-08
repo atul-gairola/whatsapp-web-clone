@@ -1,5 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
+import axios from "axios";
 
 import InitialDisplayBox from "./components/InitialDisplayBox";
 import Sidebar from "./components/Sidebar/Sidebar";
@@ -29,10 +30,18 @@ const useStyles = makeStyles({
 function App() {
   const classes = useStyles();
   const { currentChatbox } = useChatboxContext();
-  const { currentUser, signout } = useAuth();
+  const { currentUser } = useAuth();
 
   console.log(currentChatbox);
   console.log(currentUser);
+
+  // setting headers
+  axios.defaults.baseURL =
+    process.env.NODE_ENV === "production"
+      ? "https://list.stalky.tech/api"
+      : "http://localhost:8000/api/v1";
+  axios.defaults.headers.post["Content-Type"] =
+    "application/x-www-form-urlencoded";
 
   return !currentUser ? (
     <Login />
