@@ -18,18 +18,19 @@ export function AuthProvider({ children }) {
       .then(async (result) => {
         try {
           const { user, additionalUserInfo } = result;
-          console.log(result);
+          // console.log(result);
           const data = {
             displayName: user.displayName,
             email: user.email,
             emailVerified: user.emailVerified,
-            uid: additionalUserInfo.profile.id,
+            uid: user.uid,
             imageURL: additionalUserInfo.profile.picture,
             phoneNumber: user.phoneNumber,
           };
 
-          const resp = await axios.post("/user", data);
-          console.log(resp);
+          const { data: respData } = await axios.post("/user", data);
+          console.log(respData);
+          setCurrentUser(respData);
         } catch (e) {
           console.log(e);
         }
@@ -42,16 +43,23 @@ export function AuthProvider({ children }) {
   };
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
       setCurrentUser(user);
-      setLoading(false);
-
-      // set headers
       if (user) {
-        user.getIdToken(true).then((token) => {
-          console.log("Token : ", token);
-          axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-        });
+        // set headers
+        const token = await user.getIdToken(true);
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+        try {
+          // get the user from api
+          const { data } = await axios.get(
+            `http://localhost:8000/api/v1/user/${user.uid}`
+          );
+          setCurrentUser(data.user);
+          setLoading(false);
+        } catch (e) {
+          console.log(e);
+        }
       }
     });
 

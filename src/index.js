@@ -11,14 +11,12 @@ import { theme } from "./theme";
 import App from "./App";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <AuthProvider>
-        <ChatboxContextProvider>
-          <App />
-        </ChatboxContextProvider>
-      </AuthProvider>
-    </ThemeProvider>
-  </React.StrictMode>,
+  <ThemeProvider theme={theme}>
+    <AuthProvider>
+      <ChatboxContextProvider>
+        <App />
+      </ChatboxContextProvider>
+    </AuthProvider>
+  </ThemeProvider>,
   document.getElementById("root")
 );
