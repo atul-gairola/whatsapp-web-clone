@@ -44,7 +44,6 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
-      setCurrentUser(user);
       if (user) {
         // set headers
         const token = await user.getIdToken(true);
@@ -60,6 +59,9 @@ export function AuthProvider({ children }) {
         } catch (e) {
           console.log(e);
         }
+      } else {
+        setCurrentUser();
+        setLoading(false);
       }
     });
 

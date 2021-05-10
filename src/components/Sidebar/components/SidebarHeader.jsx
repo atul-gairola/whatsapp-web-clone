@@ -12,6 +12,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 
 import { useAuth } from "../../../contexts/AuthContext";
+import _ from "lodash";
 
 const useStyles = makeStyles({
   headerContainer: {
@@ -57,7 +58,7 @@ const useStyles = makeStyles({
 });
 
 function SidebarHeader() {
-  const { signout } = useAuth();
+  const { signout, currentUser } = useAuth();
 
   const classes = useStyles();
   const [open, setOpen] = useState(false);
@@ -98,8 +99,8 @@ function SidebarHeader() {
       <div style={{ flexGrow: 1 }}>
         <Avatar
           style={{ cursor: "pointer" }}
-          alt="Remy Sharp"
-          src="http://placeimg.com/640/480/abstract"
+          alt={_.startCase(currentUser.name)}
+          src={currentUser.img}
         />
       </div>
       <div className={classes.iconsContainer}>
