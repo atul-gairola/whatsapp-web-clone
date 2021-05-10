@@ -45,6 +45,14 @@ export function AuthProvider({ children }) {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
       setLoading(false);
+
+      // set headers
+      if (user) {
+        user.getIdToken(true).then((token) => {
+          console.log("Token : ", token);
+          axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        });
+      }
     });
 
     return unsubscribe;
