@@ -44,7 +44,10 @@ const useStyles = makeStyles({
   },
   body: {
     background: "#ededed",
-    display: "grid",
+    display: "flex",
+    flexDirection: "column",
+    overflowX: "hidden",
+    overflowY: "auto"
   },
   imgContainer: {
     margin: "28px 0",
@@ -113,6 +116,16 @@ const useStyles = makeStyles({
   active: {
     borderBottom: "2px solid #00bfa5",
   },
+  info: {
+   padding: "0 40px",
+   marginBottom: "20px",
+   marginTop: "10px",
+   "& p": {
+       color: "rgba(0,0,0,0.45)",
+       lineHeight: "20px",
+       fontSize: 14
+   }
+  }
 });
 
 function UserProfile() {
@@ -201,6 +214,12 @@ function UserProfile() {
               </button>
             </div>
           </div>
+        </div>
+        <div className={classes.info}>
+          <p>
+            This is not your username or pin. This name will be visible to your
+            WhatsApp contacts.
+          </p>
         </div>
         <div className={classes.aboutContainer}>
           <div className={classes.inputContainer}>
