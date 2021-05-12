@@ -14,6 +14,7 @@ import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import { Picker } from "emoji-mart";
 import "emoji-mart/css/emoji-mart.css";
 import axios from "axios";
+import Alert from "../../global/Alert";
 
 const useStyles = makeStyles({
   container: {
@@ -139,7 +140,7 @@ const useStyles = makeStyles({
 
 function UserProfile() {
   const classes = useStyles();
-  const { currentUser } = useAuth();
+  const { currentUser, signout } = useAuth();
 
   //   states
   const [values, setValues] = useState({
@@ -167,6 +168,13 @@ function UserProfile() {
   const [loading, setLoading] = useState({
     name: false,
     about: false,
+  });
+
+  const [openAlert, setOpenAlert] = useState(false);
+
+  const [feedback, setFeedback] = useState({
+    severity: "success",
+    messge: "Success",
   });
 
   //   HANDLERS
@@ -235,13 +243,30 @@ function UserProfile() {
         [inputName]: values[inputName],
       };
     }
+    try {
+      // send request to update user data
+      const { data } = await axios.patch(
+        `/user/${currentUser.googleUID}`,
+        updateData
+      );
+      console.log(data);
+    } catch (e) {
+      console.log(e.response);
+      if (e.response) {
+        // if the user is forbidden
+        if (e.response.status === 403) {
+          signout();
+          return;
+        }
 
-    // console.log(updateData);
+        setFeedback({
+          message: e.response.data.message,
+          severity: "error",
+        });
 
-    // send request to update user data
-    const { data } = await axios.patch(`/user/${currentUser.googleUID}`, updateData);
-
-    console.log(data);
+        setOpenAlert(true);
+      }
+    }
 
     setLoading((prev) => ({
       ...prev,
@@ -249,8 +274,22 @@ function UserProfile() {
     }));
   };
 
+  const handleAlertClose = (e, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenAlert(false);
+  };
+
   return (
     <>
+      <Alert
+        handleClose={handleAlertClose}
+        open={openAlert}
+        message={feedback.message}
+        severity={feedback.severity}
+      />
       {editable.nameEmojie && (
         <ClickAwayListener onClickAway={() => handleClickAway("name")}>
           <Picker
