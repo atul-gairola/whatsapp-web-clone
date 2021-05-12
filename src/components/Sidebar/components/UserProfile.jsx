@@ -224,22 +224,25 @@ function UserProfile() {
       [inputName]: true,
     }));
 
-    let data;
+    let updateData;
 
     if (inputName === "name") {
-      data = {
+      updateData = {
         displayName: values[inputName],
       };
     } else {
-      data = {
+      updateData = {
         [inputName]: values[inputName],
       };
     }
 
-    console.log(data);
+    // console.log(updateData);
 
     // send request to update user data
-    // const { data } = await axios.patch(`/user/${currentUser.uid}`, {});
+    const { data } = await axios.patch(`/user/${currentUser.googleUID}`, updateData);
+
+    console.log(data);
+
     setLoading((prev) => ({
       ...prev,
       [inputName]: false,
