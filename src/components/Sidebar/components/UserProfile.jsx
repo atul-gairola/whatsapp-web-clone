@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { makeStyles, IconButton, ClickAwayListener } from "@material-ui/core";
+import {
+  makeStyles,
+  IconButton,
+  ClickAwayListener,
+  CircularProgress,
+} from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { useAuth } from "../../../contexts/AuthContext";
 import CameraAltIcon from "@material-ui/icons/CameraAlt";
@@ -8,6 +13,7 @@ import DoneIcon from "@material-ui/icons/Done";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import { Picker } from "emoji-mart";
 import "emoji-mart/css/emoji-mart.css";
+import axios from "axios";
 
 const useStyles = makeStyles({
   container: {
@@ -158,8 +164,12 @@ function UserProfile() {
     zIndex: 400,
   });
 
-  //   handlers
+  const [loading, setLoading] = useState({
+    name: false,
+    about: false,
+  });
 
+  //   HANDLERS
   const handleEditToggle = (str) => {
     setEditable((prev) => ({
       ...prev,
@@ -195,7 +205,6 @@ function UserProfile() {
   };
 
   const handleClickAway = (name) => {
-    console.log("Click Away");
     setEditable((prev) => ({
       ...prev,
       [name + "Emojie"]: false,
@@ -203,10 +212,37 @@ function UserProfile() {
   };
 
   const handleEmojiSelect = (emoji, inputName) => {
-    console.log(emoji);
     setValues((prev) => ({
       ...prev,
       [inputName]: prev[inputName] + emoji.native,
+    }));
+  };
+
+  const handleSubmit = async (inputName) => {
+    setLoading((prev) => ({
+      ...prev,
+      [inputName]: true,
+    }));
+
+    let data;
+
+    if (inputName === "name") {
+      data = {
+        displayName: values[inputName],
+      };
+    } else {
+      data = {
+        [inputName]: values[inputName],
+      };
+    }
+
+    console.log(data);
+
+    // send request to update user data
+    // const { data } = await axios.patch(`/user/${currentUser.uid}`, {});
+    setLoading((prev) => ({
+      ...prev,
+      [inputName]: false,
     }));
   };
 
@@ -280,15 +316,28 @@ function UserProfile() {
                   placeholder="Write your name"
                   disabled={!editable.name}
                 />
-                {editable.name && (
-                  <InsertEmoticonIcon
-                    onClick={(e) => handleEmojiePicker(e, "name")}
-                    style={{ cursor: "pointer", marginRight: 5 }}
-                  />
-                )}
-                <button onClick={() => handleEditToggle("name")} title="Edit">
-                  {editable.name ? <DoneIcon /> : <EditIcon />}
-                </button>
+                {loading.name ? (
+                  <CircularProgress size={20} />
+                ) : (
+                  <>
+                    {editable.name && (
+                      <InsertEmoticonIcon
+                        onClick={(e) => handleEmojiePicker(e, "name")}
+                        style={{ cursor: "pointer", marginRight: 5 }}
+                      />
+                    )}
+                    <button
+                      onClick={() => handleEditToggle("name")}
+                      title="Edit"
+                    >
+                      {editable.name ? (
+                        <DoneIcon onClick={() => handleSubmit("name")} />
+                      ) : (
+                        <EditIcon />
+                      )}
+                    </button>
+                  </>
+                )}{" "}
               </div>
             </div>
           </div>
@@ -317,16 +366,28 @@ function UserProfile() {
                   placeholder="Write about yourself"
                   disabled={!editable.about}
                 />
-
-                {editable.about && (
-                  <InsertEmoticonIcon
-                    onClick={(e) => handleEmojiePicker(e, "about")}
-                    style={{ cursor: "pointer", marginRight: 5 }}
-                  />
-                )}
-                <button onClick={() => handleEditToggle("about")} title="Edit">
-                  {editable.about ? <DoneIcon /> : <EditIcon />}
-                </button>
+                {loading.about ? (
+                  <CircularProgress size={20} />
+                ) : (
+                  <>
+                    {editable.about && (
+                      <InsertEmoticonIcon
+                        onClick={(e) => handleEmojiePicker(e, "about")}
+                        style={{ cursor: "pointer", marginRight: 5 }}
+                      />
+                    )}
+                    <button
+                      onClick={() => handleEditToggle("about")}
+                      title="Edit"
+                    >
+                      {editable.about ? (
+                        <DoneIcon onClick={() => handleSubmit("about")} />
+                      ) : (
+                        <EditIcon />
+                      )}
+                    </button>
+                  </>
+                )}{" "}
               </div>
             </div>
           </div>
