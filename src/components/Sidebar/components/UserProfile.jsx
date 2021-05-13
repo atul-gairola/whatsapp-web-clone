@@ -68,7 +68,6 @@ const useStyles = makeStyles({
     width: 200,
     height: 200,
     borderRadius: "50%",
-    background: "pink",
     overflow: "hidden",
     position: "relative",
     // cursor: "pointer",
