@@ -57,7 +57,7 @@ const useStyles = makeStyles({
   },
 });
 
-function SidebarHeader() {
+function SidebarHeader({ handleProfileOpen }) {
   const { signout, currentUser } = useAuth();
 
   const classes = useStyles();
@@ -69,9 +69,9 @@ function SidebarHeader() {
   };
 
   const handleClose = (event) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target)) {
-      return;
-    }
+    // if (anchorRef.current && anchorRef.current.contains(event.target)) {
+    //   return;
+    // }
 
     setOpen(false);
   };
@@ -82,6 +82,11 @@ function SidebarHeader() {
       setOpen(false);
     }
   }
+
+  const handleMoreFunction = (fun1, fun2) => {
+    fun1();
+    fun2();
+  };
 
   // return focus to the button when we transitioned from !open -> open
   const prevOpen = useRef(open);
@@ -98,6 +103,7 @@ function SidebarHeader() {
     <div className={classes.headerContainer}>
       <div style={{ flexGrow: 1 }}>
         <Avatar
+          onClick={handleProfileOpen}
           style={{ cursor: "pointer" }}
           alt={_.startCase(currentUser.name)}
           src={currentUser.img}
@@ -147,7 +153,14 @@ function SidebarHeader() {
                     className={classes.menu}
                   >
                     <MenuItem onClick={handleClose}>New group</MenuItem>
-                    <MenuItem onClick={handleClose}>Profile</MenuItem>
+                    <MenuItem
+                      onClick={() => {
+                        handleProfileOpen();
+                        handleClose();
+                      }}
+                    >
+                      Profile
+                    </MenuItem>
                     <MenuItem onClick={handleClose}>Archived</MenuItem>
                     <MenuItem onClick={handleClose}>Starred</MenuItem>
                     <MenuItem onClick={handleClose}>Settings</MenuItem>

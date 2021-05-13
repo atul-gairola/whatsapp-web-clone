@@ -71,7 +71,7 @@ const useStyles = makeStyles({
     background: "pink",
     overflow: "hidden",
     position: "relative",
-    cursor: "pointer",
+    // cursor: "pointer",
     "& img": {
       height: "100%",
       width: "100%",
@@ -138,7 +138,7 @@ const useStyles = makeStyles({
   },
 });
 
-function UserProfile() {
+function UserProfile({ handleProfileClose }) {
   const classes = useStyles();
   const { currentUser, signout } = useAuth();
 
@@ -318,6 +318,7 @@ function UserProfile() {
                 style={{ width: "auto" }}
                 disableFocusRipple={true}
                 disableRipple={true}
+                onClick={handleProfileClose}
               >
                 <ArrowBackIcon />
               </IconButton>
@@ -328,14 +329,14 @@ function UserProfile() {
         <div className={classes.body}>
           <div className={classes.imgContainer}>
             <div className={classes.display}>
-              <div className={classes.overlay}>
+              {/* <div className={classes.overlay}>
                 <div>
                   <CameraAltIcon />
                   <p style={{ fontSize: 13, paddingTop: 7 }}>
                     CHANGE <br /> PROILE PHOTO
                   </p>
                 </div>
-              </div>
+              </div> */}
               <img src={currentUser.img} alt={currentUser.name} />
             </div>
           </div>
