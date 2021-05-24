@@ -4,9 +4,11 @@ import SidebarHeader from "./components/SidebarHeader";
 import SidebarSearch from "./components/SidebarSearch";
 import ChatsWrapper from "./components/ChatsWrapper";
 import UserProfile from "./components/UserProfile";
+import { useAuth } from "../../contexts/AuthContext";
 
 function Sidebar() {
   const [profileOpen, setProfileOpen] = useState(false);
+  const { currentUser } = useAuth();
 
   const handleProfileOpen = () => {
     setProfileOpen(true);
@@ -21,7 +23,7 @@ function Sidebar() {
       {profileOpen && <UserProfile handleProfileClose={handleProfileClose} />}
       <SidebarHeader handleProfileOpen={handleProfileOpen} />
       <SidebarSearch />
-      <ChatsWrapper />
+      <ChatsWrapper chats={currentUser.chats} />
     </div>
   );
 }

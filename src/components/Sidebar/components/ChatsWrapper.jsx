@@ -1,7 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core";
 
-
 import ChatTab from "./ChatTab";
 
 const useStyles = makeStyles({
@@ -52,22 +51,23 @@ const dummyData = [
   },
 ];
 
-function ChatsWrapper() {
+function ChatsWrapper({ chats }) {
   const classes = useStyles();
-
+  console.log(chats);
   return (
     <div className={classes.wrapper}>
-      {dummyData.map((cur) => (
-        <ChatTab
-          key={cur.chatId}
-          chatId={cur.chatId}
-          name={cur.name}
-          img={cur.img}
-          messageInfo={cur.messageInfo}
-          read={cur.read}
-          unseen_num={cur.unseen_num}
-        />
-      ))}
+      {
+        chats.map((cur) => {
+          <ChatTab
+            key={cur._id}
+            chatId={cur._id}
+            name={cur.displayName}
+            img={cur.imgURL}
+            messageInfo={dummyData[0].messageInfo}
+            read={dummyData[0].read}
+            unseen_num={dummyData[0].unseen_num}
+          />;
+        })}
     </div>
   );
 }
