@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core";
 
 import ChatTab from "./ChatTab";
+import { useAuth } from "../../../contexts/AuthContext";
 
 const useStyles = makeStyles({
   wrapper: {
@@ -53,21 +54,28 @@ const dummyData = [
 
 function ChatsWrapper({ chats }) {
   const classes = useStyles();
+  const { currentUser } = useAuth();
   console.log(chats);
   return (
     <div className={classes.wrapper}>
-      {
-        chats.map((cur) => {
+      {chats.map((cur) => {
+        let chatMember;
+        if (!cur.isGroup) {
+          chatMember = cur.members.filter((cur) => cur._id !== currentUser.id)[0];
+        }
+        return (
           <ChatTab
             key={cur._id}
             chatId={cur._id}
-            name={cur.displayName}
-            img={cur.imgURL}
+            name={chatMember.displayName}
+            img={chatMember.imageURL}
+            lastMessage={cur.lastMessage}
             messageInfo={dummyData[0].messageInfo}
             read={dummyData[0].read}
             unseen_num={dummyData[0].unseen_num}
-          />;
-        })}
+          />
+        );
+      })}
     </div>
   );
 }

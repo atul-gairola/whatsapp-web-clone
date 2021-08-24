@@ -3,6 +3,7 @@ import { makeStyles, Avatar } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import { useChatboxContext } from "../../../contexts/ChatboxContext";
+import { convertTimestamp } from "../../../utils";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -80,7 +81,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ChatTab({ img, name, messageInfo, time, chatId, read, unseen_num }) {
+function ChatTab({
+  img,
+  name,
+  messageInfo,
+  time,
+  chatId,
+  read,
+  unseen_num,
+  lastMessage,
+}) {
   const classes = useStyles();
   const [hover, setHover] = useState(false);
   const { updateChatbox } = useChatboxContext();
@@ -116,14 +126,20 @@ function ChatTab({ img, name, messageInfo, time, chatId, read, unseen_num }) {
       <div className={classes.infoContainer}>
         <div className={classes.titleContainer}>
           <h3 style={!read ? unreadStyle : { color: "inherit" }}>{name}</h3>
-          <p style={!read ? unreadStyle : { color: "inherit" }}>3:13 PM</p>
+          <p style={!read ? unreadStyle : { color: "inherit" }}>
+            {convertTimestamp(lastMessage.createdAt).hour +
+              " : " +
+              convertTimestamp(lastMessage.createdAt).minutes +
+              " " +
+              convertTimestamp(lastMessage.createdAt).period}
+          </p>
         </div>
         <div className={classes.bottomContainer}>
           <p
             className={classes.msg}
             style={!read ? unreadStyle : { color: "inherit" }}
           >
-            {messageInfo}
+            {lastMessage.content}
           </p>
           <div className={classes.actionContainer}>
             {!read && <Badge num={unseen_num} />}
